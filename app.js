@@ -1,8 +1,15 @@
 const formulario = document.getElementById('formulario')
 const resultadoCards = document.getElementById('resultadoCards')
 const templateCard = document.getElementById('templateCard').content
-
 let arrayCard = []
+
+document.addEventListener("DOMContentLoaded", e => {
+    if (localStorage.getItem('superCard')) {
+        arrayCard = JSON.parse(localStorage.getItem('superCard'))
+        pintarCardArray()
+    }
+})
+
 
 formulario.addEventListener('submit', e => {
     e.preventDefault()
@@ -45,6 +52,7 @@ const pintarCardArray = () => {
         fragment.appendChild(clone)
     })
     resultadoCards.appendChild(fragment)
+    localStorage.setItem('superCard', JSON.stringify(arrayCard))
 }
 
 resultadoCards.addEventListener('click', e => {
